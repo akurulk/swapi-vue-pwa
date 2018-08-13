@@ -1,6 +1,8 @@
 require('babel-register')
 var config = require('../../config')
 
+const TRAVIS = process.env.TRAVIS_JOB_NUMBER ? true : false
+
 // http://nightwatchjs.org/gettingstarted#settings-file
 module.exports = {
   src_folders: ['test/e2e/specs'],
@@ -19,8 +21,10 @@ module.exports = {
 
   test_settings: {
     default: {
-      selenium_port: 4444,
-      selenium_host: 'localhost',
+      selenium_port: TRAVIS ? 80 : 4444,
+      selenium_host: TRAVIS ? ‘ondemand.saucelabs.com’ : 'localhost',
+      username: TRAVIS ? process.env.SAUCE_USERNAME : undefined,
+      password: TRAVIS ? process.env.SAUCE_ACCESS_KEY : undefined,
       silent: true,
       globals: {
         devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port)
