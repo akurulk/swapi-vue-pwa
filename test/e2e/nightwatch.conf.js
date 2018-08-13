@@ -23,7 +23,7 @@ module.exports = {
   test_settings: {
     default: {
       selenium_port: TRAVIS ? 80 : 4444,
-      selenium_host: TRAVIS ? ‘ondemand.saucelabs.com’ : 'localhost',
+      selenium_host: TRAVIS ? 'ondemand.saucelabs.com' : 'localhost',
       username: TRAVIS ? process.env.SAUCE_USERNAME : undefined,
       password: TRAVIS ? process.env.SAUCE_ACCESS_KEY : undefined,
       silent: true,
