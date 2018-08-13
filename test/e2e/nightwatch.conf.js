@@ -2,6 +2,7 @@ require('babel-register')
 var config = require('../../config')
 
 const TRAVIS = process.env.TRAVIS_JOB_NUMBER ? true : false
+const TRAVIS_JOB_NUMBER = process.env.TRAVIS_JOB_NUMBER
 
 // http://nightwatchjs.org/gettingstarted#settings-file
 module.exports = {
@@ -35,7 +36,9 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'chrome',
         javascriptEnabled: true,
-        acceptSslCerts: true
+        acceptSslCerts: true,
+        build: `build-${TRAVIS_JOB_NUMBER}`,
+        'tunnel-identifier': TRAVIS_JOB_NUMBER,
       }
     },
 
